@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootOptions } from 'react-dom/client';
-import { RequestStatus, TOrder } from '../../utils/types';
-import { RootState } from '../store';
-import { getOrdersInfo } from '../thunk/orders';
+import { RequestStatus, TOrder } from '../../../utils/types';
+import { RootState } from '../../store';
+import { getOrdersInfo } from '../../thunk/orders';
 
-type TOrdersState = {
+export type TOrdersState = {
   info: TOrder[];
   requestStatus: RequestStatus;
 };
@@ -56,3 +56,4 @@ export const ordersInfoDataSelector =
   };
 
 export const ordersSelectors = ordersSlice.selectors;
+export const ordersReducer = ordersSlice.reducer;

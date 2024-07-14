@@ -3,8 +3,8 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
 import { makeOrder } from '../../services/thunk/burgerConstructor';
-import { burgerConstructorSlice } from '../../services/slices/burgerConstructor';
-import { userSelectors } from '../../services/slices/user';
+import { burgerConstructorSlice } from '../../services/slices/burgerConstructor/burgerConstructor';
+import { userSelectors } from '../../services/slices/user/user';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
@@ -43,7 +43,7 @@ export const BurgerConstructor: FC = () => {
       ];
       dispatch(makeOrder(orderIngredients));
     }
-  }
+  };
 
   const closeOrderModal = () => {
     dispatch(burgerConstructorSlice.actions.clearBurgerConstructor());

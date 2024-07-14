@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RequestStatus, TUser } from '../../utils/types';
+import { RequestStatus, TUser } from '../../../utils/types';
 import {
   checkUser,
   loginUser,
   logoutUser,
   registerUser,
   updateUser
-} from '../thunk/user';
+} from '../../thunk/user';
 
 export interface TUserState {
   isAuthChecked: boolean;
@@ -89,4 +89,7 @@ export const userSlice = createSlice({
   }
 });
 
+export const { authChecked, userLogout } = userSlice.actions;
+
 export const userSelectors = userSlice.selectors;
+export const userReducer = userSlice.reducer;

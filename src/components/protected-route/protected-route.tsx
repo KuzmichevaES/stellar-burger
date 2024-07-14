@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { userSelectors } from '../../services/slices/user';
+import { userSelectors } from '../../services/slices/user/user';
 import { Preloader } from '../ui/preloader/preloader';
 
 type ProtectedRouteProps = {
