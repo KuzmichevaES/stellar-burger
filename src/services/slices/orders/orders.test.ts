@@ -1,12 +1,8 @@
-import { ordersReducer, TOrdersState } from './orders';
+import { ordersReducer, TOrdersState, initialState } from './orders';
 import { getOrdersInfo } from '../../thunk/orders';
 import { RequestStatus } from '../../../utils/types';
 
 describe('test orders slice', () => {
-  const initialState: TOrdersState = {
-    info: [],
-    requestStatus: RequestStatus.Idle
-  };
 
   test('test changing requestStatus to Loading', () => {
     const testedState: TOrdersState = {

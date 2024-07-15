@@ -4,10 +4,12 @@ import {
   swapItemsInConstructor,
   clearBurgerConstructor,
   TConstructorState,
-  burgerConstructorReducer
+  burgerConstructorReducer,
+  initialState
 } from './burgerConstructor';
 import { RequestStatus, TConstructorIngredient } from '../../../utils/types';
 import { makeOrder } from '../../thunk/burgerConstructor';
+
 
 describe('test burgerConstructor slice', () => {
   const bun: TConstructorIngredient = {
@@ -55,16 +57,9 @@ describe('test burgerConstructor slice', () => {
     image_large: 'https://code.s3.yandex.net/react/code/sauce-01-large.png'
   };
 
-  const state: TConstructorState = {
-    bun: null,
-    ingredients: [],
-    order: null,
-    requestStatus: RequestStatus.Idle
-  };
-
   test('add ingredient to constructor with addToConstructor', () => {
-    const testedState = burgerConstructorReducer(state, addToConstructor(main));
-
+    const testedState = burgerConstructorReducer(initialState, addToConstructor(main));
+    
     expect(testedState.ingredients).toHaveLength(1);
     expect(testedState.ingredients[0]).toEqual({
       ...main,
@@ -79,7 +74,7 @@ describe('test burgerConstructor slice', () => {
   });
 
   test('add bun to constructor with addToConstructor', () => {
-    const testedState = burgerConstructorReducer(state, addToConstructor(bun));
+    const testedState = burgerConstructorReducer(initialState, addToConstructor(bun));
 
     expect(testedState.ingredients).toHaveLength(0);
     expect(testedState.bun).toEqual({
@@ -89,7 +84,7 @@ describe('test burgerConstructor slice', () => {
   });
 
   test('remove ingredient from constructor with deleteFromConstructor', () => {
-    const initialState: TConstructorState = {
+    const state: TConstructorState = {
       bun: null,
       ingredients: [main, sauce],
       order: null,
@@ -97,7 +92,7 @@ describe('test burgerConstructor slice', () => {
     };
 
     const testedState = burgerConstructorReducer(
-      initialState,
+      state,
       deleteFromConstructor(0)
     );
     const stateAfterDeleted: TConstructorState = {
@@ -112,7 +107,7 @@ describe('test burgerConstructor slice', () => {
   });
 
   test('swap ingredients with swapItemsInConstructor', () => {
-    const initialState: TConstructorState = {
+    const state: TConstructorState = {
       bun: null,
       ingredients: [main, sauce],
       order: null,
@@ -120,7 +115,7 @@ describe('test burgerConstructor slice', () => {
     };
 
     const testedState = burgerConstructorReducer(
-      initialState,
+      state,
       swapItemsInConstructor({ from: 1, to: 0 })
     );
     const stateAfterDeleted: TConstructorState = {
@@ -134,7 +129,7 @@ describe('test burgerConstructor slice', () => {
   });
 
   test('clear constructor with clearBurgerConstructor', () => {
-    const initialState: TConstructorState = {
+    const state: TConstructorState = {
       bun: bun,
       ingredients: [main, sauce],
       order: null,
@@ -142,7 +137,7 @@ describe('test burgerConstructor slice', () => {
     };
 
     const testedState = burgerConstructorReducer(
-      initialState,
+      state,
       clearBurgerConstructor()
     );
     const stateAfterDeleted: TConstructorState = {
@@ -157,12 +152,12 @@ describe('test burgerConstructor slice', () => {
 
   test('test changing requestStatus to Loading', () => {
     const testedState: TConstructorState = {
-      ...state,
+      ...initialState,
       requestStatus: RequestStatus.Loading
     };
 
     const actualState = burgerConstructorReducer(
-      state,
+      initialState,
       makeOrder.pending('', [], '')
     );
 
@@ -171,12 +166,12 @@ describe('test burgerConstructor slice', () => {
 
   test('test changing requestStatus to Failed', () => {
     const testedState: TConstructorState = {
-      ...state,
+      ...initialState,
       requestStatus: RequestStatus.Failed
     };
 
     const actualState = burgerConstructorReducer(
-      state,
+      initialState,
       makeOrder.rejected(new Error('Error'), '', [])
     );
 
@@ -185,7 +180,7 @@ describe('test burgerConstructor slice', () => {
 
   test('test changing requestStatus to Success', () => {
     const testedState: TConstructorState = {
-      ...state,
+      ...initialState,
       order: {
         _id: 'e111e',
         status: 'Готовится',
@@ -199,7 +194,7 @@ describe('test burgerConstructor slice', () => {
     };
 
     const actualState = burgerConstructorReducer(
-      state,
+      initialState,
       makeOrder.fulfilled(
         {
           _id: 'e111e',

@@ -1,14 +1,8 @@
-import { feedsReducer, TFeedState } from './feeds';
+import { feedsReducer, TFeedState, initialState } from './feeds';
 import { getFeeds } from '../../thunk/feeds';
 import { RequestStatus } from '../../../utils/types';
 
 describe('test feeds slice', () => {
-  const initialState: TFeedState = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    requestStatus: RequestStatus.Idle
-  };
 
   test('test changing requestStatus to Loading', () => {
     const testedState: TFeedState = {

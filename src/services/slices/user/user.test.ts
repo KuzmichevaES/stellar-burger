@@ -1,4 +1,4 @@
-import { userReducer, authChecked, userLogout, TUserState } from './user';
+import { userReducer, authChecked, userLogout, TUserState, initialState } from './user';
 import {
   checkUser,
   registerUser,
@@ -10,11 +10,6 @@ import { RequestStatus, TUser } from '../../../utils/types';
 import { TRegisterData } from '@api';
 
 describe('test user slice', () => {
-  const initialState: TUserState = {
-    isAuthChecked: false,
-    userData: null,
-    requestStatus: RequestStatus.Idle
-  };
 
   const stateAuthChecked: TUserState = {
     isAuthChecked: true,

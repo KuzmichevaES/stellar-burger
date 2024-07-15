@@ -1,12 +1,8 @@
-import { ingredientsReducer, TIngredientsState } from './ingredients';
+import { ingredientsReducer, TIngredientsState, initialState } from './ingredients';
 import { getIngredients } from '../../thunk/ingredients';
 import { RequestStatus } from '../../../utils/types';
 
 describe('test ingredients slice', () => {
-  const initialState: TIngredientsState = {
-    data: [],
-    status: RequestStatus.Idle
-  };
 
   test('test changing requestStatus to Loading', () => {
     const testedState: TIngredientsState = {

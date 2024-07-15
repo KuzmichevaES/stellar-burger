@@ -1,26 +1,27 @@
 import type {} from 'cypress';
+import { testUrl, bunIngredientCategory, mainIngredientCategory, sauceIngredientCategory, mainIngredient, modal, ingredientCard, modalCloseBtn, constructor } from '../constants';
 
 describe('проверка работы конструктора бургеров', function() {
 
     beforeEach(() => {
         cy.intercept('GET', 'api/ingredients', {fixture: 'ingredients.json'});
-        cy.visit('http://localhost:4000');
+        cy.visit(testUrl);
     })
 
     it('проверка добавления ингридиентов в конструктор бургера', function() {
-        cy.get('[data-cy=buns-category]').contains('Добавить').click();
+        cy.get(bunIngredientCategory).contains('Добавить').click();
         cy.get('[data-cy=bun-top]')
             .contains('Булка')
             .should('exist');
         cy.get('[data-cy=bun-bottom]')
             .contains('Булка')
             .should('exist');
-        cy.get('[data-cy=mains-category]').contains('Добавить').click();
-        cy.get('[data-cy=main-ingredient]')
+        cy.get(mainIngredientCategory).contains('Добавить').click();
+        cy.get(mainIngredient)
             .contains('Котлета')
             .should('exist');
-        cy.get('[data-cy=sauces-category]').contains('Добавить').click();
-        cy.get('[data-cy=main-ingredient]')
+        cy.get(sauceIngredientCategory).contains('Добавить').click();
+        cy.get(mainIngredient)
             .contains('Соус')
             .should('exist');
     });
@@ -30,28 +31,28 @@ describe('проверка модальных окон страницы конс
 
     beforeEach(() => {
         cy.intercept('GET', 'api/ingredients', {fixture: 'ingredients.json'});
-        cy.visit('http://localhost:4000');
+        cy.visit(testUrl);
     });
 
     it('проверка открытия модального окна с информацией об ингридиенте', function() {
-        cy.get('[data-cy=modal]').should('not.exist');
+        cy.get(modal).should('not.exist');
         cy.contains('Булка').click();
-        cy.get('[data-cy=modal]').should('be.visible');
-        cy.get('[data-cy=modal]').contains('Булка').should('exist');
+        cy.get(modal).should('be.visible');
+        cy.get(modal).contains('Булка').should('exist');
     });
 
     it('проверка закрытия модального окна по клику на крестик', function() {
-        cy.get('[data-cy=ingredient-card]').first().click();
-        cy.get('[data-cy=modal]').should('be.visible');
-        cy.get('[data-cy=modal-close-btn]').click();
-        cy.get('[data-cy=modal]').should('not.exist');
+        cy.get(ingredientCard).first().click();
+        cy.get(modal).should('be.visible');
+        cy.get(modalCloseBtn).click();
+        cy.get(modal).should('not.exist');
     });
 
     it('проверка закрытия модального окна по клику на оверлэй', function() {
-        cy.get('[data-cy=ingredient-card]').first().click();
-        cy.get('[data-cy=modal]').should('be.visible');
+        cy.get(ingredientCard).first().click();
+        cy.get(modal).should('be.visible');
         cy.get('[data-cy=modal-overlay]').click('topRight', { force: true });
-        cy.get('[data-cy=modal]').should('not.exist');
+        cy.get(modal).should('not.exist');
     });
 });
 
@@ -69,7 +70,7 @@ describe('проверка создания заказа', function() {
 
         cy.setCookie('accessToken', 'test-accessToken');
 
-        cy.visit('http://localhost:4000');
+        cy.visit(testUrl);
     });
 
     afterEach(() => {
@@ -78,23 +79,23 @@ describe('проверка создания заказа', function() {
     });
 
     it('проверяем работу оформления заказа', function() {
-        cy.get('[data-cy=buns-category]').contains('Добавить').click();
-        cy.get('[data-cy=mains-category]').contains('Добавить').click();
-        cy.get('[data-cy=sauces-category]').contains('Добавить').click();
+        cy.get(bunIngredientCategory).contains('Добавить').click();
+        cy.get(mainIngredientCategory).contains('Добавить').click();
+        cy.get(sauceIngredientCategory).contains('Добавить').click();
         cy.get('[data-cy=make-order-btn]').click();
 
         cy.get('[data-cy=order-number]').contains('11111').should('exist');
 
-        cy.get('[data-cy=modal-close-btn]').click();
-        cy.get('[data-cy=modal]').should('not.exist');
+        cy.get(modalCloseBtn).click();
+        cy.get(modal).should('not.exist');
 
-        cy.get('[data-cy=constructor]')
+        cy.get(constructor)
             .contains('Булка')
             .should('not.exist');
-        cy.get('[data-cy=constructor]')
+        cy.get(constructor)
             .contains('Котлета')
             .should('not.exist');
-        cy.get('[data-cy=constructor]')
+        cy.get(constructor)
             .contains('Соус')
             .should('not.exist');
     })
