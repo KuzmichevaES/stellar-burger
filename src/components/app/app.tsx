@@ -27,7 +27,7 @@ import { AppHeader, Modal, OrderInfo } from '@components';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { checkUser } from '../../services/thunk/user';
-import { userSlice } from '../../services/slices/user';
+import { userSlice } from '../../services/slices/user/user';
 import { getOrdersInfo } from '../../services/thunk/orders';
 
 const App = () => {
@@ -50,7 +50,6 @@ const App = () => {
       dispatch(userSlice.actions.authChecked())
     );
   }, [dispatch]);
-
 
   return (
     <div className={styles.app}>

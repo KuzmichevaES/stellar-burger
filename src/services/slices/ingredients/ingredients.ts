@@ -1,13 +1,13 @@
-import { getIngredients } from '../thunk/ingredients';
+import { getIngredients } from '../../thunk/ingredients';
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TIngredient } from '../../utils/types';
+import { RequestStatus, TIngredient } from '../../../utils/types';
 
-type TIngredientsState = {
+export type TIngredientsState = {
   data: TIngredient[];
   status: RequestStatus;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   data: [],
   status: RequestStatus.Idle
 };
@@ -36,3 +36,4 @@ export const ingredientsSlice = createSlice({
 });
 
 export const ingredientsSelectors = ingredientsSlice.selectors;
+export const ingredientsReducer = ingredientsSlice.reducer;

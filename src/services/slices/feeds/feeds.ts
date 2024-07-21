@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TOrder } from '../../utils/types';
-import { getFeeds } from '../thunk/feeds';
+import { RequestStatus, TOrder } from '../../../utils/types';
+import { getFeeds } from '../../thunk/feeds';
 
-type TFeedState = {
+export type TFeedState = {
   orders: TOrder[];
   total: number;
   totalToday: number;
   requestStatus: RequestStatus;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: [],
   total: 0,
   totalToday: 0,
@@ -43,3 +43,4 @@ export const feedsSlice = createSlice({
 });
 
 export const feedsSelectors = feedsSlice.selectors;
+export const feedsReducer = feedsSlice.reducer;

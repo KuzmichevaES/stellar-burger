@@ -3,9 +3,9 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { ingredientsSlice } from '../../services/slices/ingredients';
+import { ingredientsSlice } from '../../services/slices/ingredients/ingredients';
 import { useParams } from 'react-router-dom';
-import { ordersInfoDataSelector } from '../../services/slices/orders';
+import { ordersInfoDataSelector } from '../../services/slices/orders/orders';
 import { getOrderInfo } from '../../services/thunk/order';
 
 export const OrderInfo: FC = () => {

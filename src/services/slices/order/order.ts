@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus, TOrder } from '../../utils/types';
-import { getOrderInfo } from '../thunk/order';
+import { RequestStatus, TOrder } from '../../../utils/types';
+import { getOrderInfo } from '../../thunk/order';
 
-type TOrderState = {
+export type TOrderState = {
   info: TOrder | null;
   requestStatus: RequestStatus;
 };
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   info: null,
   requestStatus: RequestStatus.Idle
 };
@@ -35,3 +35,4 @@ export const orderSlice = createSlice({
 });
 
 export const orderSelectors = orderSlice.selectors;
+export const orderReducer = orderSlice.reducer;

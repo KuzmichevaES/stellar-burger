@@ -4,17 +4,17 @@ import {
   TConstructorIngredient,
   TOrder,
   RequestStatus
-} from '../../utils/types';
-import { makeOrder } from '../thunk/burgerConstructor';
+} from '../../../utils/types';
+import { makeOrder } from '../../thunk/burgerConstructor';
 
-type TConstructorState = {
+export type TConstructorState = {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
   order: TOrder | null;
   requestStatus: RequestStatus;
 };
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   bun: null,
   ingredients: [],
   order: null,
@@ -69,5 +69,8 @@ export const burgerConstructorSlice = createSlice({
 export const {
   addToConstructor,
   deleteFromConstructor,
-  swapItemsInConstructor
+  swapItemsInConstructor,
+  clearBurgerConstructor
 } = burgerConstructorSlice.actions;
+
+export const burgerConstructorReducer = burgerConstructorSlice.reducer;
